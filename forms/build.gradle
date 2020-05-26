@@ -27,9 +27,9 @@ android {
 ext {
 
     bintrayRepo = "Forms"
-    bintrayName = "com.nwagu.monnify.sdk"
+    bintrayName = "com.nwagu.forms"
 
-    publishedGroupId = 'com.nwagu.monnify.sdk'
+    publishedGroupId = 'com.nwagu.forms'
     libraryName = 'forms'
     artifact = 'forms'
 
@@ -61,4 +61,8 @@ dependencies {
     // Android LiveData library
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: '../publish.gradle'
 }
