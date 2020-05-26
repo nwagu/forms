@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 17
@@ -23,6 +22,31 @@ android {
         }
     }
 
+}
+
+ext {
+
+    bintrayRepo = "Forms"
+    bintrayName = "com.nwagu.monnify.sdk"
+
+    publishedGroupId = 'com.nwagu.monnify.sdk'
+    libraryName = 'forms'
+    artifact = 'forms'
+
+    libraryDescription = 'Android library for form management and validation'
+
+    siteUrl = ''
+    gitUrl = ''
+
+    libraryVersion = '0.0.1-beta'
+
+    developerId = 'nwagu'
+    developerName = 'Chukwuemeka Nwagu'
+    developerEmail = 'developer.nwagu@gmail.com'
+
+    licenseName = 'MIT License'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ["MIT"]
 }
 
 dependencies {
