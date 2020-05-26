@@ -1,18 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
-	
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Hello World!"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16sp">
+
+		<androidx.appcompat.widget.AppCompatEditText
+			android:id="@+id/nameEdit"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:hint="Name"
+			android:layout_marginTop="32dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/genderTextView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="24dp"
+			android:layout_marginTop="48dp"
+			android:layout_marginEnd="24dp"
+			android:layout_marginBottom="16dp"
+			android:text="Gender:"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/nameEdit" />
+
+		<RadioGroup
+			android:id="@+id/genderRadioGroup"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginStart="32dp"
+			app:layout_constraintBottom_toBottomOf="@id/genderTextView"
+			app:layout_constraintStart_toEndOf="@id/genderTextView"
+			app:layout_constraintTop_toTopOf="@id/genderTextView">
+
+			<RadioButton
+				android:id="@+id/radio_male"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="MALE" />
+
+			<RadioButton
+				android:id="@+id/radio_female"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:text="FEMALE" />
+
+		</RadioGroup>
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/genderSelectFeedback"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="8dp"
+			android:textColor="#E91E63"
+			android:textSize="10sp"
+			android:visibility="gone"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/genderRadioGroup"
+			tools:text="Gender not selected"
+			tools:visibility="visible" />
+
+		<androidx.appcompat.widget.AppCompatButton
+			android:id="@+id/submitBtn"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:padding="8dp"
+			android:layout_marginTop="48dp"
+			android:layout_marginBottom="48dp"
+			android:text="Submit"
+			android:background="@drawable/background_active_green_state_button"
+			android:textColor="#FFFFFF"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/genderSelectFeedback"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintWidth_percent="0.5"
+			app:layout_constraintHorizontal_bias="1"/>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
