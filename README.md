@@ -7,3 +7,12 @@ It contains two important classes:
 1. FormField, which extends Android LiveData
 2. Form, which contains a List of FormFields
 
+# Usage
+
+Add the dependency
+
+```groovy
+dependencies {
+    // ...
+    implementation "com.nwagu.forms:forms:0.0.2-beta"
+}
