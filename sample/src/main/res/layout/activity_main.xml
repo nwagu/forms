@@ -47,14 +47,16 @@
 				android:id="@+id/radio_male"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="MALE" />
+				android:text="MALE"
+				android:tag="MALE"/>
 
 			<RadioButton
 				android:id="@+id/radio_female"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="16dp"
-				android:text="FEMALE" />
+				android:text="FEMALE"
+				android:tag="FEMALE"/>
 
 		</RadioGroup>
 
