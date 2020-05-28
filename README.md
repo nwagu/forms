@@ -1,6 +1,6 @@
 [![Bintray](https://img.shields.io/badge/dynamic/json.svg?label=latest&query=name&style=plastic-square&url=https%3A%2F%2Fapi.bintray.com%2Fpackages%2Fnwagu%2FForms%2Fcom.nwagu.forms%2Fversions%2F_latest)](https://bintray.com/nwagu/Forms/com.nwagu.forms)
 
-## A form validation library for Android
+## A form management library for Android
 
 This simple library aims to add structure to the creation and management of forms on Android.
 From simple login forms to more complex forms that contain varying object types.
