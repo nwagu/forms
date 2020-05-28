@@ -15,7 +15,6 @@ import com.nwagu.forms.Form
 import com.nwagu.forms.FormField
 import com.nwagu.forms.FormFieldValidators.validateNonNullObject
 import com.nwagu.forms.FormFieldValidators.validateNotEmpty
-import com.nwagu.forms.extensions.observeFormField
 import com.nwagu.forms.utils.Utils.observeFormField
 
 class MainActivity : AppCompatActivity() {
@@ -26,15 +25,14 @@ class MainActivity : AppCompatActivity() {
 
     val form = Form()
 
-    val name =
-        FormField<String>(required = true)
-            .apply {
-                addValidator { validateNotEmpty() }
-                addTo(form)
-            }
+    val name = FormField<String>(required = true)
+        .apply {
+            addValidator { validateNotEmpty() }
+            addTo(form)
+        }
 
-    val gender =
-        FormField<Gender>().apply {
+    val gender = FormField<Gender>()
+        .apply {
             addValidator { validateNonNullObject() }
             addTo(form)
         }
