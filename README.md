@@ -14,7 +14,7 @@ Add the dependency
 ```groovy
 dependencies {
     // ...
-    implementation "com.nwagu.forms:forms:0.0.1"
+    implementation "com.nwagu.forms:forms:$latestVersion"
 }
 ```
 
