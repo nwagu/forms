@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 
 typealias Validator<R> = R?.() -> FormFieldValidationResult
 
+/*
+* A FormField is a LiveData
+* */
 class FormField<T>(
     val required: Boolean = true,
     private val defaultValue: T? = null
