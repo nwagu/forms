@@ -25,10 +25,10 @@ object FormFieldValidators {
 		}
 	}
 
-	fun String?.validatePhoneNumber(): FormFieldValidationResult {
+	/*fun String?.validatePhoneNumber(): FormFieldValidationResult {
 		(this != null && Pattern.compile("^[+]?[0-9]{11,13}\$").matcher(this).matches()).let {
 			return FormFieldValidationResult(ok = it, error = if (it) null else "Invalid phone number")
 		}
-	}
+	}*/
 	
 }
