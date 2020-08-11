@@ -7,6 +7,8 @@ typealias Validator<R> = R?.() -> FormFieldValidationResult
 
 /*
 * A FormField is a LiveData
+*
+* @param <T> The type of data held by this instance
 * */
 class FormField<T>(
     val required: Boolean = true,
@@ -16,6 +18,11 @@ class FormField<T>(
     var ok: Boolean = !required
     val feedback: MutableLiveData<String> = MutableLiveData()
     val error: MutableLiveData<String> = MutableLiveData()
+
+    /*
+    * Changes when this form field requires attention
+    * */
+    val requestFocus: MutableLiveData<Nothing> = MutableLiveData()
 
     init {
         if (required && defaultValue != null)
