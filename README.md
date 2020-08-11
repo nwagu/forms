@@ -14,7 +14,7 @@ Add the dependency
 ```groovy
 dependencies {
     // ...
-    implementation "com.nwagu.forms:forms:0.0.1"
+    implementation "com.nwagu.forms:forms:$latestVersion"
 }
 ```
 
@@ -63,3 +63,4 @@ observeFormField(
 #### Tips
 1. You can define your custom validation functions. A few generic validators have been added to [FormFieldValidators](forms/src/main/java/com/nwagu/forms/FormFieldValidators.kt).
 2. You can set a default value for a non-required form field.
+3. Observe form field requestFocus parameter and, on change, scroll to bring the view to focus

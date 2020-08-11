@@ -15,14 +15,25 @@ class Form {
 
     /*
     * True when all the formfields' values are verified ok
+    * Observe to activate a submit button, continue button, etc, if true
     * */
     val isComplete = MediatorLiveData<Boolean>()
 
     /*
-    * Runs validators for all the formfields in this form
+    * Runs validators for all the formfields in this form, until one fails
+    * requests focus for the failed field
+    *
+    * Observe [FormField#feedback] and if the feedback is [REQUEST_FOCUS_FEEDBACK]
+    * scroll to the view attached to the formfield to bring it to focus
     * */
     fun verify(): Boolean {
-        return formFields.all { it.verify() }
+        for (form in formFields) {
+            if (!form.verify()) {
+                form.requestFocus.value = null
+                return false
+            }
+        }
+        return true
     }
 
     private fun softVerify(): Boolean {

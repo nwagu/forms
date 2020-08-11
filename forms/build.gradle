@@ -38,7 +38,7 @@ ext {
     siteUrl = ''
     gitUrl = ''
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.0.2'
 
     developerId = 'nwagu'
     developerName = 'Chukwuemeka Nwagu'
