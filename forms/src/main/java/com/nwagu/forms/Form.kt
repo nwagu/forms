@@ -29,6 +29,9 @@ class Form {
     fun verify(): Boolean {
         for (form in formFields) {
             if (!form.verify()) {
+                if (!form.errorReportingActive)
+                    form.errorReportingActive = true
+
                 form.requestFocus.value = null
                 return false
             }
