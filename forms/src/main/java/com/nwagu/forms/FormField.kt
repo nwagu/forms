@@ -24,6 +24,25 @@ class FormField<T>(
     * */
     val requestFocus: MutableLiveData<Nothing> = MutableLiveData()
 
+    /*
+    * This is used to achieve a good UX with 'out of focus' error reporting
+    * Set this field to true, for example after the edit text loses focus,
+    * so that the error messages for the form field can start being propagated
+    * */
+    var errorReportingActive = false
+    set(value) {
+        field = value
+        if (value && error.value != errorBuffer) {
+            error.value = errorBuffer
+        }
+    }
+
+    private var errorBuffer: String? = null
+        private set(value) {
+            field = value
+            if (errorReportingActive) error.value = value
+        }
+
     init {
         if (required && defaultValue != null)
             throw RuntimeException("FormField with a non-null default value must be optional!")
@@ -63,7 +82,7 @@ class FormField<T>(
     private fun applyValidationResult(result: FormFieldValidationResult) {
         this.ok = result.ok
         this.feedback.value = result.feedback
-        this.error.value = result.error
+        errorBuffer = result.error
     }
 
     fun setValueUnsafe(value: Any?) {
