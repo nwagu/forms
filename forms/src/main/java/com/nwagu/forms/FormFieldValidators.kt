@@ -19,6 +19,14 @@ object FormFieldValidators {
 		}
 	}
 
+	fun List<*>?.validateNotNullOrEmpty(): FormFieldValidationResult {
+		(this?.isNullOrEmpty()).let {
+			(it == null || it == true).let {
+				return FormFieldValidationResult(ok = !it, error = if (!it) null else "Should not be empty")
+			}
+		}
+	}
+
 	fun String?.validateEmailAddress(): FormFieldValidationResult {
 		(this != null && Patterns.EMAIL_ADDRESS.matcher(this).matches()).let {
 			return FormFieldValidationResult(ok = it, error = if (it) null else "Invalid email")
