@@ -1,7 +1,6 @@
 package com.nwagu.forms
 
 import android.util.Patterns
-import java.util.regex.Pattern
 
 object FormFieldValidators {
 
