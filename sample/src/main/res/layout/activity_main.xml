@@ -25,7 +25,7 @@
 			android:id="@+id/postalCodeEdit"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:hint="Postal code"
+			android:hint="Postal code (6 digits)"
 			android:inputType="number"
 			android:layout_marginTop="32dp"
 			app:layout_constraintStart_toStartOf="parent"
