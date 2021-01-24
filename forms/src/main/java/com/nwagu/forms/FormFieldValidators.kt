@@ -1,7 +1,6 @@
 package com.nwagu.forms
 
 import android.util.Patterns
-import java.util.regex.Pattern
 
 object FormFieldValidators {
 
@@ -14,6 +13,14 @@ object FormFieldValidators {
 	fun String?.validateNotEmpty(): FormFieldValidationResult {
 		(this?.isNotEmpty()).let {
 			(it == null || it == false).let {
+				return FormFieldValidationResult(ok = !it, error = if (!it) null else "Should not be empty")
+			}
+		}
+	}
+
+	fun List<*>?.validateNotNullOrEmpty(): FormFieldValidationResult {
+		(this?.isNullOrEmpty()).let {
+			(it == null || it == true).let {
 				return FormFieldValidationResult(ok = !it, error = if (!it) null else "Should not be empty")
 			}
 		}

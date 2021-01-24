@@ -41,23 +41,33 @@ val genderFormField = FormField<Gender>()
 Update form
 ```kotlin
 nameEdit.doOnTextChanged { text, start, count, after ->
-            nameFormField.value = text?.toString()
-        }
+    nameFormField.value = text?.toString()
+}
+```
+
+Set error reporting to begin on focus changed
+```kotlin
+nameEdit.setOnFocusChangeListener { v, hasFocus ->
+    if (!hasFocus)
+        formField.errorReportingActive = true
+}
 ```
 
 Form fields expose observable feedback and error fields:
-
 ```kotlin
 observeFormField(
-            formField = name,
-            lifecycleOwner = this,
-            onError = {
-                nameEdit.error = it
-            },
-            onFeedback = {
-                //
-            }
-        )
+    formField = name,
+    lifecycleOwner = this,
+    onError = { err
+        nameEdit.error = it
+    },
+    onFeedback = {
+        // display helpful feedback
+    },
+    onRequestFocus = {
+        // bring nameEdit to focus
+    }
+)
 ```
 
 #### Tips

@@ -11,19 +11,24 @@ object Utils {
         lifecycleOwner: LifecycleOwner,
         onValueChanged: (T) -> Unit = {},
         onFeedback: (String?) -> Unit = {},
-        onError: (String?) -> Unit = {}
+        onError: (String?) -> Unit = {},
+        onRequestFocus: () -> Unit = {}
     ) {
 
-        formField.observe(lifecycleOwner, Observer {
+        formField.observe(lifecycleOwner, {
             onValueChanged.invoke(it)
         })
 
-        formField.feedback.observe(lifecycleOwner, Observer {
+        formField.feedback.observe(lifecycleOwner, {
             onFeedback.invoke(it)
         })
 
-        formField.error.observe(lifecycleOwner, Observer {
+        formField.error.observe(lifecycleOwner, {
             onError.invoke(it)
+        })
+
+        formField.requestFocus.observe(lifecycleOwner, {
+            onRequestFocus.invoke()
         })
 
     }
