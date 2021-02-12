@@ -26,27 +26,16 @@ android {
 
 ext {
 
+    publishGroupId = 'com.nwagu.forms'
+    publishArtifactId = 'forms'
+    publishVersion = '1.0.1'
+
+    libraryName = 'forms'
+    libraryDescription = 'Android library for form management and validation'
+
     bintrayRepo = "Forms"
     bintrayName = "com.nwagu.forms"
 
-    publishedGroupId = 'com.nwagu.forms'
-    libraryName = 'forms'
-    artifact = 'forms'
-
-    libraryDescription = 'Android library for form management and validation'
-
-    siteUrl = ''
-    gitUrl = ''
-
-    libraryVersion = '1.0.1'
-
-    developerId = 'nwagu'
-    developerName = 'Chukwuemeka Nwagu'
-    developerEmail = 'developer.nwagu@gmail.com'
-
-    licenseName = 'MIT License'
-    licenseUrl = 'https://opensource.org/licenses/MIT'
-    allLicenses = ["MIT"]
 }
 
 dependencies {
@@ -59,9 +48,10 @@ dependencies {
 
     // Android LiveData library
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
 }
 
 if (project.rootProject.file('local.properties').exists()) {
-    apply from: '../publish.gradle'
+    apply from: "${rootProject.projectDir}/publish-bintray.gradle"
+    apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
 }

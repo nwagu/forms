@@ -2,8 +2,8 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-group = publishedGroupId
-version = libraryVersion
+group = publishGroupId
+version = publishVersion
 
 install {
     repositories.mavenInstaller {
@@ -11,34 +11,32 @@ install {
         pom {
             project {
                 packaging 'aar'
-                groupId publishedGroupId
-                artifactId artifact
-                version libraryVersion
+                groupId publishGroupId
+                artifactId publishArtifactId
+                version publishVersion
 
                 // Add your description here
                 name libraryName
                 description libraryDescription
-                url siteUrl
+                url = 'https://github.com/nwagu/forms'
 
-                // Set your license
                 licenses {
                     license {
-                        name licenseName
-                        url licenseUrl
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
                     }
                 }
                 developers {
                     developer {
-                        id developerId
-                        name developerName
-                        email developerEmail
+                        id = 'nwagu'
+                        name = 'Chukwuemeka Nwagu'
+                        email = 'developer.nwagu@gmail.com'
                     }
                 }
                 scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-
+                    connection = 'scm:git:github.com/nwagu/forms.git'
+                    developerConnection = 'scm:git:ssh://github.com/nwagu/forms.git'
+                    url = 'https://github.com/nwagu/forms/tree/master'
                 }
             }
         }
@@ -88,9 +86,9 @@ bintray {
         repo = bintrayRepo
         name = bintrayName
         desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
+        websiteUrl = "https://github.com/nwagu/forms"
+        vcsUrl = "https://github.com/nwagu/forms.git"
+        licenses = ["MIT"]
         publish = true
         publicDownloadNumbers = true
         version {
