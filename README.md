@@ -1,4 +1,3 @@
-[![Bintray](https://img.shields.io/badge/dynamic/json.svg?label=latest&query=name&style=plastic-square&url=https%3A%2F%2Fapi.bintray.com%2Fpackages%2Fnwagu%2FForms%2Fcom.nwagu.forms%2Fversions%2F_latest)](https://bintray.com/nwagu/Forms/com.nwagu.forms)
 [![Maven Central](https://img.shields.io/maven-central/v/com.nwagu.forms/forms.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.nwagu.forms%22%20AND%20a:%22forms%22)
 
 ## A form management library for Android
