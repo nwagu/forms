@@ -28,7 +28,7 @@ ext {
 
     publishGroupId = 'com.nwagu.forms'
     publishArtifactId = 'forms'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
 
     libraryName = 'forms'
     libraryDescription = 'Android library for form management and validation'
