@@ -78,7 +78,7 @@ class Form {
 
         for (field in formFields) {
             isComplete.addSource(field) {
-                if (it == null) {
+                if (it != null) {
                     field.verify()
                     isComplete.value = softVerify()
                 }
