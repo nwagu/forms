@@ -18,7 +18,7 @@ dependencies {
 }
 ```
 
-Note: This project is morphing into a Kotlin Multiplatform project. Please use the latest stable version for android: 1.0.3
+#### Note: This project is morphing into a Kotlin Multiplatform project. Please use the latest stable version for android: 1.0.3
 
 See [sample activity](sample/src/main/java/com/example/forms/MainActivity.kt) for usage
 
