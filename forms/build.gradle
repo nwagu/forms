@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 30
+    namespace = 'com.nwagu.forms'
+    
+    compileSdk 34
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 30
+        minSdk 17
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
 
@@ -20,6 +21,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
     }
 
 }
@@ -38,16 +48,16 @@ ext {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.core:core-ktx:1.12.0'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // Android LiveData library
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    // Android lifecycle dependencies
+    def lifecycle_version = "2.6.2"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 }
 
-if (project.rootProject.file('local.properties').exists()) {
-    apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
-}
+//if (project.rootProject.file('local.properties').exists()) {
+//    apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
+//}
