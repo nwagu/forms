@@ -35,14 +35,12 @@ android {
 }
 
 ext {
-
     publishGroupId = 'com.nwagu.forms'
     publishArtifactId = 'forms'
     publishVersion = '1.0.3'
 
     libraryName = 'forms'
     libraryDescription = 'Android library for form management and validation'
-
 }
 
 dependencies {
@@ -58,6 +56,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 }
 
-//if (project.rootProject.file('local.properties').exists()) {
-//    apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
-//}
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"
+}
