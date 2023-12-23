@@ -11,7 +11,7 @@ import kotlin.test.assertTrue
 
 class FormTest {
 
-    val scope = CoroutineScope(EmptyCoroutineContext)
+    private val scope = CoroutineScope(EmptyCoroutineContext)
 
     @Test
     fun testEmptyForm() {
@@ -101,6 +101,16 @@ class FormTest {
         // remove invalid fields and verify that form is now valid
         form.removeFormField(field2)
         form.removeFormField(field4)
+        assertTrue(form.verify())
+
+        // add only invalid fields and verify that form is invalid
+        form.removeFormFields(field1, field3)
+        form.addFormField(field2)
+        form.addFormField(field4)
+        assertFalse(form.verify())
+
+        // remove all fields and verify that the empty form is valid
+        form.removeFormFields(field2, field4)
         assertTrue(form.verify())
     }
 }

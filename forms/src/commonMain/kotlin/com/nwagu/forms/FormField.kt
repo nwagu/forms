@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-typealias Validator<R> = R?.() -> FormFieldValidationResult
+typealias Validator<T> = T?.() -> FormFieldValidationResult
 
 /*
 * A FormField is a MutableStateFlow, so it can be collected and its value updated like any other MutableStateFlow
@@ -25,7 +25,7 @@ class FormField<T>(
 ): MutableStateFlow<T?> by MutableStateFlow(initialValue) {
 
     /*
-    * Validators are functions that take the value of the form field and return a FormFieldValidationResult
+    * Validators are extension functions (on the type of the form field) that return a FormFieldValidationResult
     * Validators are run in the order they are added to the form field
     * If a validator fails, the remaining validators are not run
     * If you make use of the feedback property, it might be best practice to add only one validator
