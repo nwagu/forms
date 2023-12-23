@@ -1,6 +1,7 @@
 package com.nwagu.forms
 
 import com.nwagu.forms.FormFieldValidators.validateEmailAddress
+import com.nwagu.forms.FormFieldValidators.validateNonNullObject
 import com.nwagu.forms.FormFieldValidators.validateNotEmpty
 import com.nwagu.forms.FormFieldValidators.validatePhoneNumber
 import kotlin.test.Test
@@ -8,6 +9,28 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class ValidatorsTest {
+
+    @Test
+    fun testValidateObjectNotNull() {
+        val formField = FormField<Any>()
+        formField.addValidator { validateNonNullObject() }
+
+        formField.value = "Hello"
+        assertTrue(formField.isValid)
+
+        formField.value = 1
+        assertTrue(formField.isValid)
+
+        formField.value = ""
+        assertTrue(formField.isValid)
+
+        formField.value = null
+        assertFalse(formField.isValid)
+
+        formField.value = Unit
+        assertTrue(formField.isValid)
+
+    }
 
     @Test
     fun testValidateStringNotEmpty() {

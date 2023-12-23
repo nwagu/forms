@@ -14,7 +14,7 @@ import kotlin.test.assertTrue
 class FormFieldTest {
 
     @Test
-    fun testStringValidators() {
+    fun testSimpleFormField() {
         val formField = FormField<String>()
         formField.addValidator { validateNotEmpty() }
 
@@ -27,12 +27,46 @@ class FormFieldTest {
     }
 
     @Test
-    fun testMultipleValidators() {
-        val formField = FormField<String>()
-        formField.addValidator { validateNotEmpty() }
+    fun testOptionalFormField() {
+        val formField = FormField<String>(required = false)
         formField.addValidator { validateEmailAddress() }
 
-        // TODO: Complete this test
+        formField.value = "ben@ben.com"
+        assertTrue(formField.isValid)
+
+        formField.value = ""
+        assertTrue(formField.isValid) // because it's optional
+
+        formField.value = null
+        assertTrue(formField.isValid) // because it's optional
+
+        formField.value = "ben@ben"
+        assertFalse(formField.isValid) // must be valid even if it's optional
+    }
+
+    @Test
+    fun testMultipleValidators() {
+        val formField = FormField<String>()
+        formField.addValidator { validateEmailAddress() }
+        formField.addValidator {
+            // validator to check that the input is not more than 30 chars long
+            if (this.isNullOrEmpty()) {
+                FormFieldValidationResult(isValid = false, error = "Should not be empty")
+            } else if (this.length <= 30) {
+                FormFieldValidationResult(isValid = true, error = null)
+            } else {
+                FormFieldValidationResult(isValid = false, error = "Too long")
+            }
+        }
+
+        formField.value = "Hello"
+        assertFalse(formField.isValid)
+
+        formField.value = "john@john.com"
+        assertTrue(formField.isValid)
+
+        formField.value = "john".repeat(10) + "@john.com"
+        assertFalse(formField.isValid)
     }
 
     @Test
@@ -102,15 +136,15 @@ class FormFieldTest {
             delay(50)
             assertEquals("Very weak password", formField.feedback.value)
 
-            formField.value = "jfyfyuvtybtuytrtydtydtydftyftyfytbfu"
+            formField.value = "averylonglypasswordthatshouldbeverystrongly"
             delay(50)
             assertEquals("Very strong password", formField.feedback.value)
 
-            formField.value = "uyfguyvyi"
+            formField.value = "password"
             delay(50)
             assertEquals("Weak password", formField.feedback.value)
 
-            formField.value = "uyfguyvyijhiuh"
+            formField.value = "strongpassword"
             delay(50)
             assertEquals("Strong password", formField.feedback.value)
         }
