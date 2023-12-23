@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.asStateFlow
 typealias Validator<R> = R?.() -> FormFieldValidationResult
 
 /*
-* A FormField is a StateFlow that holds a value of type T
+* A FormField is a MutableStateFlow, so it can be collected and its value updated like any other MutableStateFlow
+* But it also has parameters that make it suitable for use in a form,
+* such as validators, error stateflow, feedback stateflow, and focus request.
 *
 * @param required: Whether this field is optional or not.
 *   If true, the form field value is required to be non-null or non-empty to be validated
@@ -19,9 +21,15 @@ typealias Validator<R> = R?.() -> FormFieldValidationResult
 * */
 class FormField<T>(
     val required: Boolean = true,
-    private val initialValue: T? = null,
+    initialValue: T? = null
 ): MutableStateFlow<T?> by MutableStateFlow(initialValue) {
 
+    /*
+    * Validators are functions that take the value of the form field and return a FormFieldValidationResult
+    * Validators are run in the order they are added to the form field
+    * If a validator fails, the remaining validators are not run
+    * If you make use of the feedback property, it might be best practice to add only one validator
+    */
     private val validators = arrayListOf<Validator<T?>>()
 
     /*
@@ -47,6 +55,8 @@ class FormField<T>(
             field = value
             if (value && _error.value != tentativeError) {
                 _error.value = tentativeError
+            } else if (!value) {
+                _error.value = null
             }
         }
 

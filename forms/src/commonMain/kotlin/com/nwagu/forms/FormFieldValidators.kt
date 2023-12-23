@@ -2,17 +2,8 @@ package com.nwagu.forms
 
 object FormFieldValidators {
 
-    private val emailAddressRegex = Regex(
-        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                "(" +
-                "\\." +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                ")+"
-    )
-
-    private val phoneNumberRegex = Regex("^(\\+\\d{1,2}\\s?)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}\$")
+    private val emailAddressRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
+    private val phoneNumberRegex = Regex("^\\+?[0-9\\s()-]{8,}\$")
 
 	fun Any?.validateNonNullObject(): FormFieldValidationResult {
 		(this != null).let {
@@ -21,15 +12,15 @@ object FormFieldValidators {
 	}
 
 	fun String?.validateNotEmpty(): FormFieldValidationResult {
-		(this?.isNotEmpty()).let {
+		(this?.isNotBlank()).let {
 			(it == null || it == false).let {
 				return FormFieldValidationResult(isValid = !it, error = if (!it) null else "Should not be empty")
 			}
 		}
 	}
 
-	fun List<*>?.validateNotNullOrEmpty(): FormFieldValidationResult {
-		(this?.isNullOrEmpty()).let {
+	fun Collection<*>?.validateNotEmpty(): FormFieldValidationResult {
+		(this?.isEmpty()).let {
 			(it == null || it == true).let {
 				return FormFieldValidationResult(isValid = !it, error = if (!it) null else "Should not be empty")
 			}
@@ -38,7 +29,7 @@ object FormFieldValidators {
 
 	fun String?.validateEmailAddress(): FormFieldValidationResult {
 		(this != null && this.matches(emailAddressRegex)).let {
-			return FormFieldValidationResult(isValid = it, error = if (it) null else "Invalid email")
+			return FormFieldValidationResult(isValid = it, error = if (it) null else "Invalid email address")
 		}
 	}
 

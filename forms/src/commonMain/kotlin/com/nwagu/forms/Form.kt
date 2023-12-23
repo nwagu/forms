@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 /*
-* A form is a list of [FormFields]
+* A form is a list of FormFields
 * with methods to manage them (add, remove, verify, etc)
 *
 * Forms can be used for single text inputs like in a login form,
@@ -18,7 +18,7 @@ class Form(private val scope: CoroutineScope) {
     private val formFields = mutableMapOf<FormField<*>, Job>()
 
     /*
-    * True when all the formfields' values are verified ok
+    * True when all the form fields' values are validated
     * Observe to activate a submit button, continue button, etc, if true
     * */
     private val _isComplete: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -93,6 +93,29 @@ class Form(private val scope: CoroutineScope) {
     fun removeFormField(formField: FormField<*>) {
         this.formFields[formField]?.cancel()
         this.formFields.remove(formField)
+        _isComplete.value = softVerify()
+    }
+
+    /*
+    * Remove multiple form fields at once
+    * */
+    fun removeFormFields(formFields: List<FormField<*>>) {
+        for (field in formFields) {
+            this.formFields[field]?.cancel()
+            this.formFields.remove(field)
+        }
+        _isComplete.value = softVerify()
+    }
+
+    /*
+    * Remove multiple form fields at once
+    * */
+    fun removeFormFields(vararg formFields: FormField<*>) {
+        for (field in formFields) {
+            this.formFields[field]?.cancel()
+            this.formFields.remove(field)
+        }
+        _isComplete.value = softVerify()
     }
 
 }
