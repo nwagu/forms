@@ -133,7 +133,7 @@ class ValidatorsTest {
             }
         }
 
-        formField.value = "uyrewed"
+        formField.value = "qwerty!"
         assertTrue(formField.isValid)
 
         formField.value = "Hello W"
