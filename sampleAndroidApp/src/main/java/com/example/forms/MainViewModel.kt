@@ -41,7 +41,7 @@ class MainViewModel: ViewModel() {
     }
 
     private fun doAction(name: String, postalCode: String, gender: Gender) {
-        //
+        println("Name: $name, postal code: $postalCode, gender: $gender")
     }
 
 }
