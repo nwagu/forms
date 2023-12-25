@@ -1,11 +1,12 @@
 package com.nwagu.forms
 
-/*
-* This file contains some form field validators that are commonly needed in forms
-* If any of them do not meet your needs (for instance, maybe the email address regex
-* is too permissive), then you should write your own custom validators and use those instead.
-* You can also make a pull request to add to this file any validators you think would be useful to others.
-*/
+/**
+ * This object contains some form field validators that are commonly needed in forms.
+ *
+ * If any of them do not meet your needs (for instance, maybe the email address regex
+ * is too permissive), then you should write your own custom validators and use those instead.
+ * You can also make a pull request to add to this file any validators you think would be useful to others.
+ */
 object FormFieldValidators {
 
     private val emailAddressRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
