@@ -117,7 +117,7 @@ publishing {
                 scm {
                     connection = "scm:git:github.com/nwagu/forms.git"
                     developerConnection = "scm:git:ssh://github.com/nwagu/forms.git"
-                    url = "https://github.com/nwagu/forms/tree/master"
+                    url = "https://github.com/nwagu/forms/tree/main"
                 }
             }
         }
