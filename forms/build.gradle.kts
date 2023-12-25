@@ -6,16 +6,27 @@ plugins {
     id("signing")
 }
 
-kotlin {
+group = "com.nwagu.forms"
+version = "2.0.0-alpha08"
 
+kotlin {
     androidTarget {
         publishLibraryVariants("release", "debug")
     }
-
+    jvm()
+    mingwX64()
+    linuxX64()
     listOf(
-            iosX64(),
-            iosArm64(),
-            iosSimulatorArm64()
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+        macosArm64(),
+        macosX64(),
+        tvosArm64(),
+        tvosX64(),
+        watchosArm32(),
+        watchosArm64(),
+        watchosX64()
     ).forEach {
         it.binaries.framework {
             baseName = "forms"
@@ -24,14 +35,15 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+        commonMain {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+            }
         }
-        commonTest.dependencies {
-            implementation("org.jetbrains.kotlin:kotlin-test-common")
-            implementation("org.jetbrains.kotlin:kotlin-test-annotations-common")
-            implementation("org.jetbrains.kotlin:kotlin-test")
-            implementation("org.jetbrains.kotlin:kotlin-test-junit")
+        commonTest {
+            dependencies {
+                implementation(kotlin("test"))
+            }
         }
     }
 }
@@ -47,11 +59,7 @@ android {
     }
 }
 
-task("testClasses").doLast {
-    println("This is a dummy testClasses task")
-}
-
-val dokkaOutputDir = "${layout.buildDirectory}/dokka"
+val dokkaOutputDir = "${buildDir}/dokka"
 
 tasks.dokkaHtml {
     outputDirectory.set(file(dokkaOutputDir))
@@ -67,18 +75,12 @@ val javadocJar = tasks.register<Jar>("javadocJar") {
     from(dokkaOutputDir)
 }
 
-// begin region
 // Fix Gradle warning about signing tasks using publishing task outputs without explicit dependencies
 // https://github.com/gradle/gradle/issues/26091
 tasks.withType<AbstractPublishToMaven>().configureEach {
     val signingTasks = tasks.withType<Sign>()
     mustRunAfter(signingTasks)
 }
-tasks.withType<Sign>().configureEach {
-    val bundlingTasks = tasks.withType<AbstractArchiveTask>()
-    mustRunAfter(bundlingTasks)
-}
-// end region
 
 publishing {
     repositories {
@@ -93,10 +95,6 @@ publishing {
     }
     publications {
         withType<MavenPublication> {
-            groupId = "com.nwagu.forms"
-            artifactId = "forms"
-            version = "2.0.0-alpha08"
-
             artifact(javadocJar)
 
             pom {
@@ -128,5 +126,6 @@ publishing {
 }
 
 signing {
+    isRequired = true
     sign(publishing.publications)
 }
