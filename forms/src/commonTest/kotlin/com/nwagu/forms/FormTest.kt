@@ -139,11 +139,12 @@ class FormTest {
             addTo(form)
         }
 
+        var focusRequestCount = 0
+        scope.launch {
+            field2.focusRequest.collect { focusRequestCount++ }
+        }
+
         runBlocking {
-            var focusRequestCount = 0
-            scope.launch {
-                field2.focusRequest.collect { focusRequestCount++ }
-            }
             delay(50)
             repeat(3) {
                 val temp = focusRequestCount
