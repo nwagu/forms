@@ -1,0 +1,41 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.nwagu.forms.utils////PointingToDeclaration/forms/com.nwagu.forms.utils/index.html
+$dokka.location:com.nwagu.forms.utils//observe/com.nwagu.forms.FormField[TypeParam(bounds=[kotlin.Any?])]#kotlinx.coroutines.CoroutineScope#kotlin.Function1[TypeParam(bounds=[kotlin.Any?])?,kotlin.Unit]#kotlin.Function1[kotlin.Any?,kotlin.Unit]#kotlin.Function1[kotlin.String?,kotlin.Unit]#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/forms/com.nwagu.forms.utils/observe.html
+$dokka.location:com.nwagu.forms////PointingToDeclaration/forms/com.nwagu.forms/index.html
+$dokka.location:com.nwagu.forms/Form///PointingToDeclaration/forms/com.nwagu.forms/-form/index.html
+$dokka.location:com.nwagu.forms/Form/Form/#kotlinx.coroutines.CoroutineScope/PointingToDeclaration/forms/com.nwagu.forms/-form/-form.html
+$dokka.location:com.nwagu.forms/Form/addFormField/#com.nwagu.forms.FormField[*]/PointingToDeclaration/forms/com.nwagu.forms/-form/add-form-field.html
+$dokka.location:com.nwagu.forms/Form/addFormFields/#kotlin.Array[com.nwagu.forms.FormField[*]]/PointingToDeclaration/forms/com.nwagu.forms/-form/add-form-fields.html
+$dokka.location:com.nwagu.forms/Form/addFormFields/#kotlin.collections.List[com.nwagu.forms.FormField[*]]/PointingToDeclaration/forms/com.nwagu.forms/-form/add-form-fields.html
+$dokka.location:com.nwagu.forms/Form/isComplete/#/PointingToDeclaration/forms/com.nwagu.forms/-form/is-complete.html
+$dokka.location:com.nwagu.forms/Form/removeFormField/#com.nwagu.forms.FormField[*]/PointingToDeclaration/forms/com.nwagu.forms/-form/remove-form-field.html
+$dokka.location:com.nwagu.forms/Form/removeFormFields/#kotlin.Array[com.nwagu.forms.FormField[*]]/PointingToDeclaration/forms/com.nwagu.forms/-form/remove-form-fields.html
+$dokka.location:com.nwagu.forms/Form/removeFormFields/#kotlin.collections.List[com.nwagu.forms.FormField[*]]/PointingToDeclaration/forms/com.nwagu.forms/-form/remove-form-fields.html
+$dokka.location:com.nwagu.forms/Form/verify/#/PointingToDeclaration/forms/com.nwagu.forms/-form/verify.html
+$dokka.location:com.nwagu.forms/FormField///PointingToDeclaration/forms/com.nwagu.forms/-form-field/index.html
+$dokka.location:com.nwagu.forms/FormField/FormField/#kotlin.Boolean#TypeParam(bounds=[kotlin.Any?])?/PointingToDeclaration/forms/com.nwagu.forms/-form-field/-form-field.html
+$dokka.location:com.nwagu.forms/FormField/addTo/#com.nwagu.forms.Form/PointingToDeclaration/forms/com.nwagu.forms/-form-field/add-to.html
+$dokka.location:com.nwagu.forms/FormField/addValidator/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?])?,com.nwagu.forms.FormFieldValidationResult]/PointingToDeclaration/forms/com.nwagu.forms/-form-field/add-validator.html
+$dokka.location:com.nwagu.forms/FormField/addValidators/#kotlin.Array[kotlin.Function1[TypeParam(bounds=[kotlin.Any?])?,com.nwagu.forms.FormFieldValidationResult]]/PointingToDeclaration/forms/com.nwagu.forms/-form-field/add-validators.html
+$dokka.location:com.nwagu.forms/FormField/error/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field/error.html
+$dokka.location:com.nwagu.forms/FormField/errorReportingEnabled/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field/error-reporting-enabled.html
+$dokka.location:com.nwagu.forms/FormField/feedback/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field/feedback.html
+$dokka.location:com.nwagu.forms/FormField/focusRequest/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field/focus-request.html
+$dokka.location:com.nwagu.forms/FormField/isValid/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field/is-valid.html
+$dokka.location:com.nwagu.forms/FormField/required/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field/required.html
+$dokka.location:com.nwagu.forms/FormFieldValidationResult///PointingToDeclaration/forms/com.nwagu.forms/-form-field-validation-result/index.html
+$dokka.location:com.nwagu.forms/FormFieldValidationResult/FormFieldValidationResult/#kotlin.Boolean#kotlin.String?#kotlin.Any?/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validation-result/-form-field-validation-result.html
+$dokka.location:com.nwagu.forms/FormFieldValidationResult/error/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validation-result/error.html
+$dokka.location:com.nwagu.forms/FormFieldValidationResult/feedback/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validation-result/feedback.html
+$dokka.location:com.nwagu.forms/FormFieldValidationResult/isValid/#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validation-result/is-valid.html
+$dokka.location:com.nwagu.forms/FormFieldValidators///PointingToDeclaration/forms/com.nwagu.forms/-form-field-validators/index.html
+$dokka.location:com.nwagu.forms/FormFieldValidators/validateEmailAddress/kotlin.String?#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validators/validate-email-address.html
+$dokka.location:com.nwagu.forms/FormFieldValidators/validateNonNullObject/kotlin.Any?#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validators/validate-non-null-object.html
+$dokka.location:com.nwagu.forms/FormFieldValidators/validateNotEmpty/kotlin.String?#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validators/validate-not-empty.html
+$dokka.location:com.nwagu.forms/FormFieldValidators/validateNotEmpty/kotlin.collections.Collection[*]?#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validators/validate-not-empty.html
+$dokka.location:com.nwagu.forms/FormFieldValidators/validatePhoneNumber/kotlin.String?#/PointingToDeclaration/forms/com.nwagu.forms/-form-field-validators/validate-phone-number.html
+$dokka.location:com.nwagu.forms/Validator///PointingToDeclaration/forms/com.nwagu.forms/-validator/index.html
+com.nwagu.forms
+com.nwagu.forms.utils
+
