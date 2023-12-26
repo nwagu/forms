@@ -3,10 +3,13 @@ package com.nwagu.forms
 import com.nwagu.forms.FormFieldValidators.validateEmailAddress
 import com.nwagu.forms.FormFieldValidators.validateNotEmpty
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -14,7 +17,17 @@ import kotlin.test.assertTrue
 
 class FormTest {
 
-    private val scope = CoroutineScope(EmptyCoroutineContext)
+    private var scope = CoroutineScope(EmptyCoroutineContext)
+
+    @BeforeTest
+    fun setup() {
+        scope = CoroutineScope(EmptyCoroutineContext)
+    }
+
+    @AfterTest
+    fun tearDown() {
+        scope.cancel()
+    }
 
     @Test
     fun testEmptyForm() {

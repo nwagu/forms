@@ -3,15 +3,31 @@ package com.nwagu.forms
 import com.nwagu.forms.FormFieldValidators.validateEmailAddress
 import com.nwagu.forms.FormFieldValidators.validateNotEmpty
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class FormFieldTest {
+
+    private var scope = CoroutineScope(EmptyCoroutineContext)
+
+    @BeforeTest
+    fun setup() {
+        scope = CoroutineScope(EmptyCoroutineContext)
+    }
+
+    @AfterTest
+    fun tearDown() {
+        scope.cancel()
+    }
 
     @Test
     fun testSimpleFormField() {
@@ -45,6 +61,69 @@ class FormFieldTest {
     }
 
     @Test
+    fun testFormFieldErrorState() {
+        val formField = FormField<String>().apply {
+            addValidator { validateEmailAddress() }
+            errorReportingEnabled = true
+            // add to a form so that validations are run automatically
+            addTo(Form(scope))
+        }
+
+        var errorMessage: String? = null
+        scope.launch {
+            formField.error.collect { errorMessage = it }
+        }
+
+        runBlocking {
+            delay(50)
+
+            formField.value = "ben@ben.com"
+            delay(50)
+            assertEquals(null, errorMessage)
+
+            formField.value = "b"
+            delay(50)
+            assertEquals("Invalid email address", errorMessage)
+
+            formField.value = "b@"
+            delay(50)
+            assertEquals("Invalid email address", formField.error.value)
+
+            formField.value = "b@b"
+            delay(50)
+            assertEquals("Invalid email address", errorMessage)
+
+            formField.value = "b@be"
+            delay(50)
+            assertEquals("Invalid email address", errorMessage)
+
+            formField.value = "b@ben"
+            delay(50)
+            assertEquals("Invalid email address", formField.error.value)
+
+            formField.value = "b@ben."
+            delay(50)
+            assertEquals("Invalid email address", formField.error.value)
+
+            formField.value = "b@ben.com"
+            delay(50)
+            assertEquals(null, errorMessage)
+
+            formField.value = "be@ben.com"
+            delay(50)
+            assertEquals(null, errorMessage)
+
+            formField.value = "ben@ben.com"
+            delay(50)
+            assertEquals(null, formField.error.value)
+
+            formField.value = "beny@ben.com"
+            delay(50)
+            assertEquals(null, formField.error.value)
+        }
+    }
+
+    @Test
     fun testMultipleValidators() {
         val formField = FormField<String>()
         formField.addValidator { validateEmailAddress() }
@@ -74,7 +153,7 @@ class FormFieldTest {
         val formField = FormField<String>().apply {
             errorReportingEnabled = true
             // add to a form so that validations are run automatically
-            addTo(Form(scope = CoroutineScope(EmptyCoroutineContext)))
+            addTo(Form(scope))
         }
 
         formField.addValidator {
@@ -109,7 +188,7 @@ class FormFieldTest {
     fun testCustomValidatorFeedback() {
         val formField = FormField<String>().apply {
             // add to a form so that validations are run automatically
-            addTo(Form(scope = CoroutineScope(EmptyCoroutineContext)))
+            addTo(Form(scope))
         }
 
         formField.addValidator {
