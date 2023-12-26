@@ -5,7 +5,8 @@
 This simple library aims to add structure to the creation and management of forms on Android.
 From simple login forms to more complex forms that contain varying object types.
 
-The FormField class extends Android LiveData class, so databinding might be preferred for updating and observing them.
+#### Note: This project is morphing into a Kotlin Multiplatform project. Please use the latest stable version for android: 1.0.3
+
 
 ## Usage
 
@@ -18,22 +19,20 @@ dependencies {
 }
 ```
 
-#### Note: This project is morphing into a Kotlin Multiplatform project. Please use the latest stable version for android: 1.0.3
-
-See [sample activity](sample/src/main/java/com/example/forms/MainActivity.kt) for usage
+See [sample activity](sampleAndroidApp/src/main/java/com/example/forms/MainActivity.kt) for usage
 
 Create your form fields and add them to an instance of Form.
 
 ```kotlin
-val form = Form()
+val form = Form(viewModelScope)
 
-val nameFormField = FormField<String>(required = true)
+val name = FormField<String>(required = true)
         .apply {
             addValidator { validateNotEmpty() }
             addTo(form)
         }
 
-val genderFormField = FormField<Gender>()
+val gender = FormField<Gender>()
         .apply {
             addValidator { validateNonNullObject() }
             addTo(form)
@@ -43,7 +42,7 @@ val genderFormField = FormField<Gender>()
 Update form
 ```kotlin
 nameEdit.doOnTextChanged { text, start, count, after ->
-    nameFormField.value = text?.toString()
+    name.value = text?.toString()
 }
 ```
 
@@ -51,28 +50,26 @@ Set error reporting to begin on focus changed
 ```kotlin
 nameEdit.setOnFocusChangeListener { v, hasFocus ->
     if (!hasFocus)
-        formField.errorReportingActive = true
+        name.errorReportingEnabled = true
 }
 ```
 
 Form fields expose observable feedback and error fields:
 ```kotlin
-observeFormField(
-    formField = name,
-    lifecycleOwner = this,
-    onError = { err
-        nameEdit.error = it
-    },
+name.observe(
+    lifecycleScope,
     onFeedback = {
         // display helpful feedback
     },
-    onRequestFocus = {
+    onError = {
+        nameEdit.error = it
+    },
+    onFocusRequest = {
         // bring nameEdit to focus
     }
 )
 ```
 
 #### Tips
-1. You can define your custom validation functions. A few generic validators have been added to [FormFieldValidators](forms/src/main/java/com/nwagu/forms/FormFieldValidators.kt).
-2. You can set a default value for a non-required form field.
-3. Observe form field requestFocus parameter and, on change, scroll to bring the view to focus
+1. You can define your custom validation functions. A few generic validators have been added to [FormFieldValidators](forms/src/commonMain/kotlin/com/nwagu/forms/FormFieldValidators.kt).
+2. Observe a form field's focusRequest to bring the view to focus when the form field has an error.
