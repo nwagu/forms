@@ -72,4 +72,6 @@ name.observe(
 2. Observe a form field's `focusRequest` to bring the view to focus when the form field has an error.
 
 ## Note about multiplatform status
-I am currently working on the iOS integration. That's why it's still alpha. If you would like to use the older LiveData-based version of this library just for Android, please use version: 1.0.3
+You can use this library now on Android or the JVM. I am currently trying it out on the other target platforms, especially iOS. 
+That's why it's still in alpha. 
+If you would like to use the older, stable, LiveData-based version of this library just for Android, please use version: `1.0.3`.
