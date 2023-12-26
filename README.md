@@ -5,9 +5,6 @@
 This simple library aims to add structure to the creation and management of forms on Android.
 From simple login forms to more complex forms that contain varying object types.
 
-#### Note: This project is morphing into a Kotlin Multiplatform project. Please use the latest stable version for android: 1.0.3
-
-
 ## Usage
 
 Add the dependency
@@ -72,4 +69,7 @@ name.observe(
 
 #### Tips
 1. You can define your custom validation functions. A few generic validators have been added to [FormFieldValidators](forms/src/commonMain/kotlin/com/nwagu/forms/FormFieldValidators.kt).
-2. Observe a form field's focusRequest to bring the view to focus when the form field has an error.
+2. Observe a form field's `focusRequest` to bring the view to focus when the form field has an error.
+
+## Note about multiplatform status
+I am currently working on the iOS integration. That's why it's still alpha. If you would like to use the older LiveData-based version of this library just for Android, please use version: 1.0.3
