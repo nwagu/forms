@@ -12,7 +12,7 @@ Add the dependency
 ```groovy
 dependencies {
     // ...
-    implementation "com.nwagu.forms:forms:$latestVersion"
+    implementation "com.nwagu.forms:forms:2.0.0-alpha09"
 }
 ```
 
