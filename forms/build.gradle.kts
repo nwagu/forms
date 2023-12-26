@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.nwagu.forms"
-version = "2.0.0-alpha08"
+version = "2.0.0-alpha09"
 
 kotlin {
     androidTarget {
