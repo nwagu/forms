@@ -1,7 +1,11 @@
 package com.nwagu.forms
 
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 /**
@@ -39,13 +43,13 @@ class FormField<T>(
 
     private val validators = arrayListOf<Validator<T?>>()
 
-    internal val _focusRequest: MutableStateFlow<Unit> = MutableStateFlow(Unit)
+    internal val _focusRequest: MutableSharedFlow<Unit> = MutableSharedFlow(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     /**
      * This emits a Unit value when the field is to be brought to the user's attention.
      * 
      * It is updated by the parent form when this form field fails validation.
      */
-    val focusRequest: StateFlow<Unit> = _focusRequest.asStateFlow()
+    val focusRequest: SharedFlow<Unit> = _focusRequest.asSharedFlow()
 
     private val _error: MutableStateFlow<String?> = MutableStateFlow(null)
     val error: StateFlow<String?> = _error.asStateFlow()

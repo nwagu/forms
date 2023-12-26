@@ -47,7 +47,7 @@ class Form(private val scope: CoroutineScope) {
                 if (!formField.errorReportingEnabled)
                     formField.errorReportingEnabled = true
 
-                formField._focusRequest.value = Unit
+                formField._focusRequest.tryEmit(Unit)
                 return false
             }
         }

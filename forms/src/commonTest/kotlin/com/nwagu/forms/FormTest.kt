@@ -1,11 +1,14 @@
 package com.nwagu.forms
 
+import com.nwagu.forms.FormFieldValidators.validateEmailAddress
 import com.nwagu.forms.FormFieldValidators.validateNotEmpty
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -112,5 +115,42 @@ class FormTest {
         // remove all fields and verify that the empty form is valid
         form.removeFormFields(field2, field4)
         assertTrue(form.verify())
+    }
+
+    @Test
+    fun testFocusRequest() {
+        val form = Form(scope)
+
+        // valid field
+        val field1 = FormField<String>(initialValue = "hello").apply {
+            addValidator { validateNotEmpty() }
+            addTo(form)
+        }
+
+        // invalid
+        val field2 = FormField<String>(initialValue = "notanemail").apply {
+            addValidator { validateEmailAddress() }
+            addTo(form)
+        }
+
+        // another valid field
+        val field3 = FormField<String>(required = false).apply {
+            addValidator { validateNotEmpty() }
+            addTo(form)
+        }
+
+        runBlocking {
+            var focusRequestCount = 0
+            scope.launch {
+                field2.focusRequest.collect { focusRequestCount++ }
+            }
+            delay(50)
+            repeat(3) {
+                val temp = focusRequestCount
+                form.verify()
+                delay(50)
+                assertEquals(temp + 1, focusRequestCount)
+            }
+        }
     }
 }
