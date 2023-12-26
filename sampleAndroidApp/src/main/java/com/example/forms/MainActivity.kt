@@ -71,11 +71,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun attachToFormFields() {
 
-        nameEdit.doOnTextChanged { text, start, count, after ->
+        nameEdit.doOnTextChanged { text, _, _, _ ->
             viewModel.name.value = text?.toString()
         }
 
-        postalCodeEdit.doOnTextChanged { text, start, count, after ->
+        postalCodeEdit.doOnTextChanged { text, _, _, _ ->
             viewModel.postalCode.value = text?.toString()
         }
 
