@@ -4,6 +4,10 @@ import com.nwagu.forms.FormFieldValidators.validateEmailAddress
 import com.nwagu.forms.FormFieldValidators.validateNonNullObject
 import com.nwagu.forms.FormFieldValidators.validateNotEmpty
 import com.nwagu.forms.FormFieldValidators.validatePhoneNumber
+import io.kotest.property.Arb
+import io.kotest.property.arbitrary.*
+import io.kotest.property.forAll
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -11,25 +15,28 @@ import kotlin.test.assertTrue
 class ValidatorsTest {
 
     @Test
-    fun testValidateObjectNotNull() {
-        val formField = FormField<Any>()
-        formField.addValidator { validateNonNullObject() }
+    fun testValidateObjectNotNull() = runTest {
 
-        formField.value = "Hello"
-        assertTrue(formField.isValid)
+        val generators = listOf(
+            Arb.string().orNull(),
+            Arb.int().orNull(),
+            Arb.long().orNull(),
+            Arb.double().orNull(),
+            Arb.float().orNull(),
+            Arb.boolean().orNull(),
+            Arb.byte().orNull(),
+            Arb.short().orNull(),
+            Arb.char().orNull(),
+            Arb.constant(Unit)
+        )
 
-        formField.value = 1
-        assertTrue(formField.isValid)
+        forAll(Arb.choice(generators)) { value ->
+            val formField = FormField<Any>()
+            formField.addValidator { validateNonNullObject() }
 
-        formField.value = ""
-        assertTrue(formField.isValid)
-
-        formField.value = null
-        assertFalse(formField.isValid)
-
-        formField.value = Unit
-        assertTrue(formField.isValid)
-
+            formField.value = value
+            formField.isValid == (value != null)
+        }
     }
 
     @Test
